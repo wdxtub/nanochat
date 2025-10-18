@@ -100,8 +100,11 @@ def autodetect_device_type():
     print0(f"Autodetected device type: {device_type}")
     return device_type
 
-def compute_init(device_type="cuda"): # cuda|cpu|mps
+def compute_init(device_type=None): # cuda|cpu|mps
     """Basic initialization that we keep doing over and over, so make common."""
+    
+    if device_type is None:
+        device_type = autodetect_device_type()
 
     assert device_type in ["cuda", "mps", "cpu"], "Invalid device type atm"
     if device_type == "cuda":
